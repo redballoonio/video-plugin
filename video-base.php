@@ -39,7 +39,7 @@ function register_cpt_video() {
         $args = array(
             'labels' => $labels,
             'hierarchical' => false,
-            'description' => 'A place to base all your videos for the website.',
+            'description' => 'Add videos here that require a custom description or image.',
             'supports' => array( 'title', 'excerpt', 'thumbnail', 'custom-fields' ),
             'taxonomies' => array( 'category', 'post_tag', 'video_categories' ),
             'public' => true,
@@ -76,12 +76,11 @@ function video_attributes() {
 	echo '<input type="hidden" name="blog_id" value="'. $blog_id .'">';
 
 	// Get the location data if its already been entered
-
-		$video_url_id = get_post_meta($post->ID, '_video_url_id', true);
+    $video_url_id = get_post_meta($post->ID, '_video_url_id', true);
 
 	// Echo out the field
-        echo '<p>URL to page:</p>';
-		echo '<input type="text" name="_video_url_id" value="' . $video_url_id  . '" class="widefat" />';
+    echo '<p>Video Url</p>';
+    echo '<input type="text" name="_video_url_id" value="' . $video_url_id  . '" class="widefat" />';
 }
 
 
@@ -133,30 +132,14 @@ add_action('save_post', 'wpt_save_video_meta', 1, 2); // save the custom fields
 // Scripts
 function add_video_base_files(){
     if ( shortcode_exists('video') ) {
-        wp_register_script( 'video-script', plugins_url( 'js/video-base.js', __FILE__ ), array('jquery'),'1.0', true);
-        wp_register_style( 'video-styles',  plugins_url( 'css/video-base.min.css', __FILE__ ));
+        wp_register_script( 'video-script', plugins_url( 'public/js/video-base.js', __FILE__ ), array('jquery'),'1.0', true);
+        wp_register_style( 'video-styles',  plugins_url( 'public/css/video-base.min.css', __FILE__ ));
     };
 }
 add_action( 'wp_enqueue_scripts', 'add_video_base_files' );
 
-
-// Variables for creating the modal output above the footer. Takes information from inc/shortcode.php and outputs the content in the footer of the page.
-$videoBaseModals = 0;
-$modalsHTML = '';
-
 // Shortcodes
-add_shortcode('video', 'video_shortcode');
-include('inc/shortcode.php');
+add_shortcode('video', 'rbd_video_shortcode');
 
-// Footer content
-include('inc/footer.php');
-add_action('wp_footer', 'outputModalHTML');
-
-/*
-Planned Updates:
-
-* Other display options for modal thumbnail.
-* Other options for the play icon
-
-*/
+include('public/shortcode.php');
 ?>

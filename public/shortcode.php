@@ -1,5 +1,14 @@
 <?php
-function video_shortcode( $atts, $content = null)  {
+
+
+$modal_number = 0;
+$modals_html = '';
+
+/**
+ * Outputs the video shortcode onto the page:
+ */
+
+function rbd_video_shortcode( $atts, $content = null)  {
     wp_enqueue_script( 'video-script' );
     wp_enqueue_style( 'video-styles' );
 
@@ -18,7 +27,7 @@ function video_shortcode( $atts, $content = null)  {
     );
 
     // Count for the video to add unique IDs to each video.
-    static $videoCount = 0;
+    static $video_count = 0;
 
     $video_output = ''; // output variable
 
@@ -27,12 +36,14 @@ function video_shortcode( $atts, $content = null)  {
     // If user selects a gallery:
     $id_array = explode(',', $id);
     $youtube_id_array = explode(',', preg_replace('/\s+/', '', $youtube_id) );
+
     if ((count($id_array) > 1 OR count($youtube_id_array) > 1) AND $type !== 'gallery' ) {
         return "<p><strong>Please only enter a single ID, or set the type to gallery.</strong></p>";
     }
+
     if ($type === 'gallery') {
-        $excerptHTML = '';
-        $titleOUT = '';
+        $excerpt_html = '';
+        $title_out = '';
         if (count($id_array) > 1 ){
             $id_count = 0;
             foreach ($id_array as $id_n) {
@@ -50,59 +61,59 @@ function video_shortcode( $atts, $content = null)  {
             if ( !empty($id) ) {
                 $video                  = get_post( $id );
                 $video_url_id		    = get_post_meta($video->ID, '_video_url_id', true);
-                $videoExcerpt           = apply_filters('the_excerpt', get_post_field('post_excerpt', $video));
+                $video_excerpt           = apply_filters('the_excerpt', get_post_field('post_excerpt', $video));
 
         		if ( !empty($youtube_id) ) {
-                    $videoYT_ID         = $youtube_id;
+                    $video_YT_ID         = $youtube_id;
                 } else {
-                    $videoYT_ID         = $video_url_id;
+                    $video_YT_ID         = $video_url_id;
                 }
 
                 // decide to show/hide excerpt
                 if ( $excerpt === 'show') {
-                    $excerptHTML        = '<div class="excerpt">'.$videoExcerpt.'</div>';
+                    $excerpt_html       = '<div class="excerpt">'.$video_excerpt.'</div>';
                 } else {
-                    $excerptHTML        = '';
+                    $excerpt_html       = '';
                 }
                 // decide to replace the title
                 if ( !empty($video->post_title) ) {
-                    $titleOUT           = $video->post_title;
+                    $title_out           = $video->post_title;
                 }
                 // we can also only show video thumbs videos with id's, but tat code is currently below.
             } else {
-                $videoYT_ID             = $youtube_id;
-                $titleOUT               = $content;
-                $excerptHTML            = '';
+                $video_YT_ID             = $youtube_id;
+                $title_out               = $content;
+                $excerpt_html            = '';
             }
 
-            $videoAR = getARfromYoutubeID($videoYT_ID);
-            $videoARPadding             = 'padding-bottom:'.strval($videoAR).'%;';
+            $video_ar= getARfromYoutubeID($video_YT_ID);
+            $video_ar_padding             = 'padding-bottom:'.strval($video_ar).'%;';
 
 
             // Creates the HTML for the thumbnail.
             if ( $thumbnail === 'show' && !empty($id) && has_post_thumbnail($id) ) {
 
-                $thumbcodesrc           =  wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
+                $thumb_code_src           =  wp_get_attachment_image_src(get_post_thumbnail_id($id), 'full');
 
                 // Fix for multi post thumbnails
-                if (gettype($thumbcodesrc) === 'array') {
-                    $thumbcodesrc = $thumbcodesrc[0];
+                if (gettype($thumb_code_src) === 'array') {
+                    $thumb_code_src = $thumb_code_src[0];
                 }
             } else {
-                $thumbcodesrc           = 'http://img.youtube.com/vi/'.$videoYT_ID.'/hqdefault.jpg';
+                $thumb_code_src           = 'http://img.youtube.com/vi/'.$video_YT_ID.'/hqdefault.jpg';
             }
 
-            $thumbnailHTML              = '<div class="video-thumbnail" style="background-image:url('.$thumbcodesrc.');"><div class="play-icon"></div></div>';
+            $thumbnailHTML              = '<div class="video-thumbnail" style="background-image:url('.$thumb_code_src.');"><div class="play-icon"></div></div>';
 
-            $iframeHTML                 = '<div class="iframe-element" data-id="'.$videoYT_ID.'" id="video_element_'.$videoCount.'"></div>';
+            $iframeHTML                 = '<div class="iframe-element" data-id="'.$video_YT_ID.'" id="video_element_'.$video_count.'"></div>';
 
             $host                       = 'youtube';
 
         } else {
-            $titleOUT                   = '';
-            $videoARPadding             = 'padding-bottom:56.25%;';
+            $title_out                   = '';
+            $video_ar_padding             = 'padding-bottom:56.25%;';
             $thumbnailHTML              = '';
-            $excerptHTML                = '';
+            $excerpt_html                = '';
             $iframeHTML                 = '<iframe src="'.$iframe_url.'" frameborder="0" allowfullscreen="" width="660" height="340"></iframe>';
             $host                       = '';
         }
@@ -112,8 +123,8 @@ function video_shortcode( $atts, $content = null)  {
         if ( $title != 'hide' ) {
             if (strlen($content) > 0) {
                 $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $content . '</h4></div>';
-            } else if (strlen($titleOUT) > 0 ) {
-                $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $titleOUT . '</h4></div>';
+            } else if (strlen($title_out) > 0 ) {
+                $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $title_out . '</h4></div>';
             }
         }
     }
@@ -150,59 +161,59 @@ function video_shortcode( $atts, $content = null)  {
             // Loop through all of the videos and output them here:
             $titleHTML = '';
             if (count($id_array)>1) {
-                $titleOUT = get_the_title($id_array[$output_n]);
+                $title_out = get_the_title($id_array[$output_n]);
             } else {
-                $titleOUT = '';
+                $title_out = '';
             }
             if ( $title != 'hide' ) {
                 if (strlen($content) > 0) {
                     $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $content . '</h4></div>';
-                } else if (strlen($titleOUT) > 0 ) {
-                    $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $titleOUT . '</h4></div>';
+                } else if (strlen($title_out) > 0 ) {
+                    $titleHTML              = '<div class="video-title '.$title_style.'"><h4>' . $title_out . '</h4></div>';
                 }
             }
-            $videoAR = getARfromYoutubeID($YT_id_array[$output_n]);
-            $videoARPadding             = 'padding-bottom:'.strval($videoAR).'%;';
+            $video_ar = getARfromYoutubeID($YT_id_array[$output_n]);
+            $video_ar_padding             = 'padding-bottom:'.strval($video_ar).'%;';
 
-            $iframeHTML                 = '<div class="iframe-element" data-id="'.$YT_id_array[$output_n].'" id="video_element_'.$videoCount.'"></div>';
+            $iframeHTML                 = '<div class="iframe-element" data-id="'.$YT_id_array[$output_n].'" id="video_element_'.$video_count.'"></div>';
             if ( count($id_array) > 1 && has_post_thumbnail( $id_array[$output_n] ) ) {
-                $thumbcodesrc           =  wp_get_attachment_image_src(get_post_thumbnail_id($id_array[$output_n]), 'full');
-                if (gettype($thumbcodesrc) === 'array') {
-                    $thumbcodesrc = $thumbcodesrc[0];
+                $thumb_code_src           =  wp_get_attachment_image_src(get_post_thumbnail_id($id_array[$output_n]), 'full');
+                if (gettype($thumb_code_src) === 'array') {
+                    $thumb_code_src = $thumb_code_src[0];
                 }
             } else {
-                $thumbcodesrc           = 'http://img.youtube.com/vi/'.$YT_id_array[$output_n].'/hqdefault.jpg';
+                $thumb_code_src           = 'http://img.youtube.com/vi/'.$YT_id_array[$output_n].'/hqdefault.jpg';
             }
-            $thumbnailHTML              = '<div class="video-thumbnail" style="background-image:url('.$thumbcodesrc.');"><div class="play-icon"></div></div>';
-            $activeItem = '';
+            $thumbnailHTML              = '<div class="video-thumbnail" style="background-image:url('.$thumb_code_src.');"><div class="play-icon"></div></div>';
+            $active_item = '';
 
             if ($output_n === 0){
-                $activeItem = 'active';
+                $active_item = 'active';
             }
             $embed                  = '';
-            $embed                 .= '<div class="item '.$activeItem.' ">';
-            $embed                 .= '<div class="video-base type--gallery '.$host.'" id="video_base_'.$videoCount.'">';
+            $embed                 .= '<div class="item '.$active_item.' ">';
+            $embed                 .= '<div class="video-base type--gallery '.$host.'" id="video_base_'.$video_count.'">';
             $embed                 .= '<div class="video-content">';
             $embed                 .= $titleHTML;
-            $embed                 .= '<div class="iframe-wrap" style="'.$videoARPadding.'">';
+            $embed                 .= '<div class="iframe-wrap" style="'.$video_ar_padding.'">';
             $embed                 .= $iframeHTML;
             // $embed                 .= $thumbnailHTML;
             $embed                 .= '</div><!--iframe-wrap outer--></div><!--video-content-->';
-            $embed                 .= '</div><!-- video_base_'.$videoCount.' -->';
+            $embed                 .= '</div><!-- video_base_'.$video_count.' -->';
             $embed                 .= '</div><!--/item-->';
 
             if (strpos($gallery_options, 'indicators') !== false) {
-                $indicatorsHTML .= '<li data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="'.$activeItem.'"></li>';
+                $indicatorsHTML .= '<li data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="'.$active_item.'"></li>';
             }
             if (strpos($gallery_options, 'pagination') !== false) {
                 if (strpos($gallery_options, 'pagination-title') !== false) {
-                    $paginationHTML .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="thumbnail-control"><div class="video-title">'.$titleOUT.'</div><div class="thumbnail-controls-image" style="background-image:url('.$thumbcodesrc.'); '.$videoARPadding.'"></div></div></li>';
+                    $paginationHTML .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="thumbnail-control"><div class="video-title">'.$title_out.'</div><div class="thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
                 } else {
-                    $paginationHTML .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="thumbnail-control"><div class="thumbnail-controls-image" style="background-image:url('.$thumbcodesrc.'); '.$videoARPadding.'"></div></div></li>';
+                    $paginationHTML .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="thumbnail-control"><div class="thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
                 }
             }
             $video_output          .= $embed;
-            $videoCount++;
+            $video_count++;
             $output_n++;
         }
 
@@ -224,46 +235,45 @@ function video_shortcode( $atts, $content = null)  {
     } else {
 
         if ( $type === 'embed' ) {
-            $embed                 .= '<div class="video-base type--embed '.$host.'" id="video_base_'.$videoCount.'">';
+            $embed                 .= '<div class="video-base type--embed '.$host.'" id="video_base_'.$video_count.'">';
             $embed                 .= '<div class="video-content">';
             $embed                 .= $titleHTML;
-            $embed                 .= '<div class="iframe-wrap" style="'.$videoARPadding.'">';
+            $embed                 .= '<div class="iframe-wrap" style="'.$video_ar_padding.'">';
             $embed                 .= $iframeHTML;
             // $embed                 .= $thumbnailHTML;
             $embed                 .= '</div><!--iframe-wrap outer--></div><!--video-content-->';
-            $embed                 .= $excerptHTML;
-            $embed                 .= '</div><!-- video_base_'.$videoCount.' -->';
+            $embed                 .= $excerpt_html;
+            $embed                 .= '</div><!-- video_base_'.$video_count.' -->';
             if ( !empty($youtube_id) OR !empty($id) ){
-                $videoCount++;
+                $video_count++;
             }
         }
         if ($type === 'modal'){
 
-            // Global variables set in ../video-base.php
-            $GLOBALS['videoBaseModals'] = $GLOBALS['videoBaseModals'] + 1;
-            $videoBaseModal         = $GLOBALS['videoBaseModals'];
+            $modal_number++;
+            $video_base_modal         = $modal_number;
 
-            $embed                 .= '<div class="video-base '.$host.'" id="video_base_'.$videoCount.'">';
-            $embed                 .= '<div class="video-content" onclick="jQuery(this).addClass(\'modal-open\');jQuery(\'#video-modal-'.$videoBaseModal.'\').modal(\'show\');">';
+            $embed                 .= '<div class="video-base '.$host.'" id="video_base_'.$video_count.'">';
+            $embed                 .= '<div class="video-content" onclick="jQuery(this).addClass(\'modal-open\');jQuery(\'#video-modal-'.$video_base_modal.'\').modal(\'show\');">';
             $embed                 .= $titleHTML;
-            $embed                 .= '<div class="iframe-wrap" style="'.$videoARPadding.'">';
+            $embed                 .= '<div class="iframe-wrap" style="'.$video_ar_padding.'">';
             //$embed                 .= $thumbnailHTML;
             $embed                 .= '</div><!--iframe-wrap--></div><!--video-content-->';
-            $embed                 .= $excerptHTML;
-            $embed                 .= '</div><!-- video_base_'.$videoCount.' -->';
+            $embed                 .= $excerpt_html;
+            $embed                 .= '</div><!-- video_base_'.$video_count.' -->';
 
             // This content gets output by the modals function above the footer;
-            $modal                 .= '<div id="video-modal-'.$videoBaseModal.'" class="modal fade play-on-open" role="dialog">';
+            $modal                 .= '<div id="video-modal-'.$video_base_modal.'" class="modal fade play-on-open" role="dialog">';
             $modal                 .= '<div class="modal-dialog"><div class="modal-content text-center"><button type="button" class="close" data-dismiss="modal">&times;</button>';
             $modal                 .= '<div class="video-base type--modal youtube">';
-            $modal                 .= '<div class="iframe-wrap" style="'.$videoARPadding.'">';
+            $modal                 .= '<div class="iframe-wrap" style="'.$video_ar_padding.'">';
             $modal                 .= $iframeHTML;
             $modal                 .= '</div><!--iframe-wrap--></div><!--video-base-->';
             $modal                 .= '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
             $modal                 .= '</div><!-- Modal content--></div><!-- Modal dialog-->';
-            $modal                 .= '</div><!--video-modal-'.$videoBaseModal.'-->';
+            $modal                 .= '</div><!--video-modal-'.$video_base_modal.'-->';
             if ( !empty($youtube_id) OR !empty($id) ){
-                $videoCount++;
+                $video_count++;
             }
         }
     }
@@ -274,16 +284,43 @@ function video_shortcode( $atts, $content = null)  {
     }
     return $video_output;
 }
+
+
+/**
+ * Gets the aspect ratio of a youtube video by id
+ * @param (String) $the_video_id - Youtube video ID
+ * @return (Number) - The aspect ratio
+ */
+
 function getARfromYoutubeID($the_video_id){
     $videoYTInfoJSON            = @file_get_contents('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='.$the_video_id.'&format=json');
     if( $videoYTInfoJSON === FALSE ) {
         // Fallback padding value:
-        $videoAR                = 56.25;
+        $video_ar                = 56.25;
     } else {
         // Decodes json and calculates the aspect ratio.
         $videoYTInfo            = json_decode($videoYTInfoJSON);
-        $videoAR                = (intval($videoYTInfo->height) / intval($videoYTInfo->width)) * 100;
+        $video_ar                = (intval($videoYTInfo->height) / intval($videoYTInfo->width)) * 100;
     }
-    return $videoAR;
+    return $video_ar;
 }
+
+
+// Footer content
+
+/**
+ * Output the modal html
+ */
+function rbd_output_modal_html(){
+    // Global variables set in ../video-base.php
+    if ( $modal_number > 0) {
+        $modalOutput  = '<div id="rb-video-modals">';
+        $modalOutput .= $modals_html;
+        $modalOutput .= '</div><!--video-modals-->';
+        echo $modal_output;
+    }
+}
+
+include('inc/footer.php');
+add_action('wp_footer', 'rbd_output_modal_html');
 ?>

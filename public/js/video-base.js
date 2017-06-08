@@ -8,7 +8,6 @@ var $iframeElements = jQuery('.iframe-element');
 
 function onYouTubeIframeAPIReady() {
     if (vidPageReady && document.body !== null) {
-
         var firstID = $iframeElements.eq(0).attr('id').split('_');
         var firstIDno = firstID[(firstID.length - 1)];
         if (firstIDno != 0) {

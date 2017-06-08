@@ -1,13 +1,9 @@
 {
-  "name": "video-base",
+  "name": "video-base-plugin",
   "version": "1.0.0",
   "description": "Video base plugin for wordpress",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Red Balloon",
-  "license": "ISC",
+  "license": "GPL",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "~0.10.0",

@@ -14,10 +14,10 @@ module.exports = function(grunt) {
           yuicompress: true,
           optimization: 2,
           sourceMap: true,
-          sourceMapFilename: 'css/style.map.css'
+          sourceMapFilename: 'public/css/video-base.map.css'
         },
         files: {
-          "css/video-base.css": "css/video-base.less" // destination file and source file
+          "public/css/video-base.min.css": "public/css/source/video-base.less" // destination file and source file
         }
       }
     }
