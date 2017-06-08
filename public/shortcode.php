@@ -293,14 +293,14 @@ function rbd_video_shortcode( $atts, $content = null)  {
  */
 
 function getARfromYoutubeID($the_video_id){
-    $videoYTInfoJSON            = @file_get_contents('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='.$the_video_id.'&format=json');
-    if( $videoYTInfoJSON === FALSE ) {
+    $video_yt_info_json            = @file_get_contents('https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v='.$the_video_id.'&format=json');
+    if( $video_yt_info_json === FALSE ) {
         // Fallback padding value:
         $video_ar                = 56.25;
     } else {
         // Decodes json and calculates the aspect ratio.
-        $videoYTInfo            = json_decode($videoYTInfoJSON);
-        $video_ar                = (intval($videoYTInfo->height) / intval($videoYTInfo->width)) * 100;
+        $video_yt_info            = json_decode($video_yt_info_json);
+        $video_ar                = (intval($video_yt_info->height) / intval($video_yt_info->width)) * 100;
     }
     return $video_ar;
 }

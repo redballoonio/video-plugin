@@ -4,6 +4,7 @@
   "description": "Video base plugin for wordpress",
   "author": "Red Balloon",
   "license": "GPL",
+  "repository": "https://github.com/redballoonio/video-plugin.git",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
