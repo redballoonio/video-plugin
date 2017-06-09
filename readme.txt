@@ -1,7 +1,7 @@
 === RB Video ===
 Contributors: markredballoon, redballoondesignltd
 Tags: videos, youtube, modal, responsive, gallery
-Requires at least: 4.4.2
+Requires at least: 4.3
 Tested up to: 4.8
 Stable tag: 4.8
 License: GPLv2 or later
@@ -71,9 +71,17 @@ Shows or hides the custom thumbnail. If the video is brought in using the `youtu
 
 Changes which type of video is brought in. "embed" or "modal" can be used with or without a video page set up. Gallery requires the videos be added by the id attribute. If you are adding the video using the `iframe_url` attribute then you must use the embed option.
 
-`gallery_options="" (default: empty)` 
+`modal_options="[options]" (default: empty)`
 
-Only used when the type is set to gallery. Adds different carousel control options: 
+Only used when the type is set to modal. Adds buttons types that close the modal. Multiple options can be selected, add them as a comma separated list.
+* "cross" : adds a cross in the top right of the modal.
+* "button" : adds a button beneath the modal to close it.
+
+Clicking the background will always close the modal.
+
+`gallery_options="[options]" (default: empty)` 
+
+Only used when the type is set to gallery. Adds different carousel control options. Multiple options can be selected, add them as a comma separated list.
 * "arrows" : adds arrows that sit on top of the video.
 * "thumbnails" : adds a row of thumbnail images below that can be used to select a different video.
 * "indicators" : indicator buttons underneath the video.

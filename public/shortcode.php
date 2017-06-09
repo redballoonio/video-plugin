@@ -25,6 +25,7 @@ function rbd_video_shortcode( $atts, $content = null)  {
                 'excerpt'           => 'hide',            // whether to SHOW, HIDE or replace the excerpt.
                 'type'              => 'embed',           // As a MODAL or as an in post EMBED? Default is embed.
                 'iframe_url'        => '',                 // URL to use if id and youtube_id haven't been set.
+                'modal_options'   => '',                 // comma seperated list of options for the modal
                 'gallery_options'   => ''                 // comma seperated list of options for the gallery
             ), $atts
         )
@@ -267,12 +268,17 @@ function rbd_video_shortcode( $atts, $content = null)  {
 
             // This content gets output by the modals function above the footer;
             $modal                 .= '<div id="video-modal-'.$video_base_modal.'" class="rbd-modal fade play-on-open" role="dialog">';
-            $modal                 .= '<div class="modal-dialog"><div class="rbd-modal-content text-center"><button type="button" class="close" data-dismiss="modal">&times;</button>';
+            $modal                 .= '<div class="modal-dialog"><div class="rbd-modal-content text-center">';
+            if (strpos($modal_options, 'cross')!== false){
+                $modal             .= '<button type="button" class="close" data-dismiss="modal">&times;</button>';
+            }
             $modal                 .= '<div class="rbd-video-base type--modal youtube">';
             $modal                 .= '<div class="rbd-iframe-wrap" style="'.$video_ar_padding.'">';
             $modal                 .= $iframeHTML;
             $modal                 .= '</div><!--iframe-wrap--></div><!--video-base-->';
-            $modal                 .= '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+            if (strpos($modal_options, 'button')!== false){
+                $modal             .= '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>';
+            }
             $modal                 .= '</div><!-- Modal content--></div><!-- Modal dialog-->';
             $modal                 .= '</div><!--video-modal-'.$video_base_modal.'-->';
             if ( !empty($youtube_id) OR !empty($id) ){
