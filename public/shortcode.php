@@ -142,7 +142,7 @@ function rbd_video_shortcode( $atts, $content = null)  {
 
         $host                       = 'youtube';
         $indicators_html             = ''; // circluar buttons that control the
-        $pagination_html             = '';
+        $thumbnails_html             = '';
         $arrows_html                 = '';
         if ( strpos($gallery_options, 'arrows') !== false) {
             $arrows_html .= '<a class="rbd-carousel-control left" href="#video-base-carousel_'.$video_gallery_count.'" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>';
@@ -153,8 +153,8 @@ function rbd_video_shortcode( $atts, $content = null)  {
             $indicators_html .= '<ol class="rbd-carousel-indicators">';
         }
 
-        if (strpos($gallery_options, 'pagination') !== false) {
-            $pagination_html .= '<ul class="rbd-video-thumbnail-controls">';
+        if (strpos($gallery_options, 'thumbnails') !== false) {
+            $thumbnails_html .= '<ul class="rbd-video-thumbnail-controls">';
         }
         while ($output_n <= $iterations) {
             // Loop through all of the videos and output them here:
@@ -203,11 +203,11 @@ function rbd_video_shortcode( $atts, $content = null)  {
             if (strpos($gallery_options, 'indicators') !== false) {
                 $indicators_html .= '<li data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="'.$active_item.'"></li>';
             }
-            if (strpos($gallery_options, 'pagination') !== false) {
-                if (strpos($gallery_options, 'pagination-title') !== false) {
-                    $pagination_html .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="rbd-thumbnail-control"><div class="video-title">'.$title_out.'</div><div class="rbd-thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
+            if (strpos($gallery_options, 'thumbnails') !== false) {
+                if (strpos($gallery_options, 'thumbnails-title') !== false) {
+                    $thumbnails_html .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="rbd-thumbnail-control"><div class="video-title">'.$title_out.'</div><div class="rbd-thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
                 } else {
-                    $pagination_html .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="rbd-thumbnail-control"><div class="rbd-thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
+                    $thumbnails_html .= '<li style="width:'.(100/($iterations+1)).'%"><div data-target="#video-base-carousel_'.$video_gallery_count.'" data-slide-to="'.$output_n.'" class="rbd-thumbnail-control"><div class="rbd-thumbnail-controls-image" style="background-image:url('.$thumb_code_src.'); '.$video_ar_padding.'"></div></div></li>';
                 }
             }
             $video_output          .= $embed;
@@ -219,14 +219,14 @@ function rbd_video_shortcode( $atts, $content = null)  {
             $indicators_html .= '</ol>';
         }
         if (strpos($gallery_options, 'pagination') !== false) {
-            $pagination_html .= '</ul>';
+            $thumbnails_html .= '</ul>';
         }
 
         $video_output          .= '</div>';
         $video_output          .= $arrows_html;
         $video_output          .= $indicators_html;
         $video_output          .= '</div><!--video_gallery_'.$video_gallery_count.'-->';
-        $video_output          .= $pagination_html;
+        $video_output          .= $thumbnails_html;
 
         $video_gallery_count++;
 
