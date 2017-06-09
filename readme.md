@@ -28,15 +28,20 @@ Includes a number of embed methods:
 
 Youtube video embed with a custom thumbnail and a title:
 
-`[video id="21" title="show" thumbnail="show"]`
+`[video id="21" title="show" thumbnail="show"][/video]`
 
 Youtube video brought in by youtube_id displayed using a modal
 
-`[video youtube_id="SW3o7rSn-TY" type="modal"]`
+`[video youtube_id="SW3o7rSn-TY" type="modal"][/video]`
 
 Video gallery using the thumbnail option:
 
-`[video id="21, 22, 23" type="gallery" gallery_options="thumbnails"]`
+`[video id="21, 22, 23" type="gallery" gallery_options="thumbnails"][/video]`
+
+Video embed using a non-youtube video:
+
+`[video iframe_url="https://player.vimeo.com/video/197202895"][/video]`
+
 
 ## Shortcode options
 
@@ -58,7 +63,7 @@ If the video isn't a youtube video then a the url gets added into a responsive i
 
 `title="show/hide" (default: "show")`
 
-Whether to show or hide the video's title. This option is only used when the video is output using the id attribute.
+Whether to show or hide the video's title (only works with videos added as a custom post).
 
 `title_style="[css-class]" (default: blank)`
 
@@ -66,11 +71,11 @@ Css class that gets added to the title to apply multiple custom styles. Can be u
 
 `thumbnail="show/hide" (default: "show")`
 
-Shows or hides the custom thumbnail. If the video is brought in using the youtube_id attribute, or the video post has no featured image, then the youtube default image will be used. No thumbnail image will be shown when using the iframe_url attribute.
+Shows or hides the custom thumbnail. If the video is brought in using the `youtube_id` attribute, or the video post has no featured image, then the youtube default image will be used. No thumbnail image will be shown when using the `iframe_url` attribute.
 
 `type="embed/modal/gallery" (default: "embed")`
 
-Changes which type of video is brought in. Embed or modal can be used with or without a video page set up. Gallery requires the videos be added by the id attribute.
+Changes which type of video is brought in. "embed" or "modal" can be used with or without a video page set up. Gallery requires the videos be added by the id attribute. If you are adding the video using the `iframe_url` attribute then you must use the embed option.
 
 `gallery_options="" (default: empty)` 
 
