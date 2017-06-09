@@ -74,8 +74,8 @@ Changes which type of video is brought in. "embed" or "modal" can be used with o
 `gallery_options="" (default: empty)` 
 
 Only used when the type is set to gallery. Adds different carousel control options: 
-* "arrows" : adds arrows that sit ontop of the video.
-* "thumbnails" : adds a row of thumnail images below that can be used to select a different video.
+* "arrows" : adds arrows that sit on top of the video.
+* "thumbnails" : adds a row of thumbnail images below that can be used to select a different video.
 * "indicators" : indicator buttons underneath the video.
 
 
@@ -87,7 +87,7 @@ _This plugin uses modal and gallery js taken from Bootstrap 3._
 1. Upload the unzipped folder to the `/wp-content/plugins/` directory of your wordpress site
 1. Activate the plugin through the 'Plugins' menu in Wordpress
 1. Add the `[video]` shortcode where you want the video to be output
-1. Use the shortcode options to customize how the video gets displayed
+1. Use the shortcode options to customise how the video gets displayed
 
 == Frequently Asked Questions ==
 = Does this work with other video hosts? =
@@ -110,7 +110,7 @@ This plugin is primarily designed to work with youtube videos, but it can work w
 * Added the gallery option for videos
 
 = 1.0 =
-* Added video post type, Modals and controling the videos using the youtube api
+* Added video post type, Modals and controlling the videos using the youtube api
 
 == Upgrade Notice ==
 
