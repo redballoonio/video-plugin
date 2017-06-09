@@ -98,9 +98,10 @@ _This plugin uses modal and gallery js taken from Bootstrap 3._
 This plugin is primarily designed to work with youtube videos, but it can work with any iframe content.
 
 # Screenshots 
-1. Example of the modal option
-2. Example of the gallery option
-3. Example of the embed option. The height of the video will respond with the width of the element.
+
+1. Example of the modal option ![Example of the modal](https://github.com/redballoonio/video-plugin/tree/master/screenshots/modal.png "Example of the modal")
+2. Example of the gallery option ![Example of the gallery](https://github.com/redballoonio/video-plugin/tree/master/screenshots/gallery.png "Example of the gallery")
+3. Example of the embed option. The height of the video will respond with the width of the element. ![Example of the embed](https://github.com/redballoonio/video-plugin/tree/master/screenshots/embed.png "Example of the embed")
 
 # Changelog 
 
