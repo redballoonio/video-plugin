@@ -1,10 +1,9 @@
 === Video Base ===
 Contributors: markredballoon
-Author: Red Balloon <hello@redballoon.io>
 Tags: videos, youtube, modal, responsive
-Requires at least: 4.4.6
-Tested up to: 7.5.2
-Stable tag: 7.5.2
+Requires at least: 4.4.2
+Tested up to: 4.8
+Stable tag: 4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,9 +15,9 @@ A plugin for responsively displaying videos. These can be within the content, as
 
 This plugin can be used in two ways: you can add single videos by their youtube id or iframe url, or you can add videos to the video custom post type. Using the custom post type you can add a custom title, excerpt and thumbnail to the images. Multiple videos can also be used in a gallery or brought out as a modal.
 
-# Shortcodes
+## Shortcodes
 
-## One of these options must be set:
+### One of these options must be set:
 
 `id='[video id]' (default: blank)`
 This is the id of the video page in Wordpress that this links to. If you set the type to gallery then you can add multiple comma separated ids.
@@ -29,7 +28,7 @@ This is the id of the youtube video you want to link to. This is the 11 digit co
 `iframe_url="[non-youtube-url]" (default:blank)`
 If the video isn't a youtube video then a the url gets added into a responsive iframe. This isn't used if id or youtube_id is used. This can only be used to provide a responsive wrap to the iframe.
 
-## These options may also be set:
+### These options may also be set:
 
 `title="show/hide" (default: "show")`
 Whether to show or hide the video's title. This option is only used when the video is output using the id attribute.
