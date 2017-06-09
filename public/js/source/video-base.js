@@ -4,7 +4,6 @@ module.exports = function(w, d, $){
     var firstScriptTag = document.getElementsByTagName('script')[0];
     var vidPageReady = false;
 
-
     var players = [];
     var $iframeElements = $('.rbd-iframe-element');
 
@@ -119,16 +118,8 @@ module.exports = function(w, d, $){
                     }, 100);
                 },
                 'hide.bs.modal': function() {
-                    console.log('hiden', this);
                     getChildPlayer($(this)).stopVideo();
-                },
-                'click': function(e){
-                    $(this).find('[data-dismiss="modal"]').trigger('click');
                 }
-            });
-
-            $('.rbd-modal .rbd-modal-content').on('click', function(e){
-                e.stopPropagation();
             });
 
             // play videos automatically when clicking thumbnail control.

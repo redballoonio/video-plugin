@@ -22,4 +22,4 @@ var videoBaseScript = require('./video-base.js');
     } else {
         jqueryLoaded();
     }
-})()
+})();

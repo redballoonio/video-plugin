@@ -1182,16 +1182,8 @@ module.exports = function (w, d, $) {
                     }, 100);
                 },
                 'hide.bs.modal': function hideBsModal() {
-                    console.log('hiden', this);
                     getChildPlayer($(this)).stopVideo();
-                },
-                'click': function click(e) {
-                    $(this).find('[data-dismiss="modal"]').trigger('click');
                 }
-            });
-
-            $('.rbd-modal .rbd-modal-content').on('click', function (e) {
-                e.stopPropagation();
             });
 
             // play videos automatically when clicking thumbnail control.

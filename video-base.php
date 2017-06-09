@@ -3,7 +3,7 @@
 Plugin Name: RB Video
 Plugin URI: http://redballoon.io
 Description: A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery. Designed to work with youtube videos.
-Version: 1.0
+Version: 1.2
 Author: Red Balloon Design Ltd
 Author URI: http://redballoon.io
 License: GPLv2
@@ -135,7 +135,7 @@ add_action('save_post', 'rbd_save_video_meta', 1, 2); // save the custom fields
 function add_video_base_files(){
 
     if ( shortcode_exists('video') ) {
-        wp_register_script( 'video-script', plugins_url( 'public/js/video-base.js', __FILE__ ), array('jquery') ,'1.1', true);
+        wp_register_script( 'video-script', plugins_url( 'public/js/video-base.min.js', __FILE__ ), array('jquery') ,'1.1', true);
         wp_register_style( 'video-styles',  plugins_url( 'public/css/video-base.min.css', __FILE__ ));
     };
     

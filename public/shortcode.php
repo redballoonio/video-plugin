@@ -1,6 +1,8 @@
 <?php
 
-$modal_number = 0;
+global $modal_number;
+global $modals_html;
+$modals_html = 0;
 $modals_html = '';
 
 
@@ -8,6 +10,9 @@ $modals_html = '';
  * Outputs the video shortcode onto the page:
  */
 function rbd_video_shortcode( $atts, $content = null)  {
+    global $modal_number;
+    global $modals_html;
+
     wp_enqueue_script( 'video-script' );
     wp_enqueue_style( 'video-styles' );
 
@@ -238,7 +243,7 @@ function rbd_video_shortcode( $atts, $content = null)  {
             $embed                 .= $titleHTML;
             $embed                 .= '<div class="rbd-iframe-wrap" style="'.$video_ar_padding.'">';
             $embed                 .= $iframeHTML;
-            // $embed                 .= $thumbnailHTML;
+            $embed                 .= $thumbnailHTML;
             $embed                 .= '</div><!--iframe-wrap outer--></div><!--video-content-->';
             $embed                 .= $excerpt_html;
             $embed                 .= '</div><!-- video_base_'.$video_count.' -->';
@@ -282,11 +287,21 @@ function rbd_video_shortcode( $atts, $content = null)  {
         $video_output = $embed;
     }
 
-    $video_output .= $modal;
+    // $video_output .= $modal;
 
     return $video_output;
 }
 
+
+add_action( 'wp_footer', 'rbd_video_footercontent', 1);
+
+function rbd_video_footercontent(){
+    global $modal_number;
+    global $modals_html;
+    if ($modal_number > 0){
+        echo '<div id="rbd-modals-wrap">'.$modals_html.'</div>';
+    }
+}
 
 /**
  * Gets the aspect ratio of a youtube video by id
