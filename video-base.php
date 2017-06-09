@@ -3,7 +3,7 @@
 Plugin Name: Video Base
 Plugin URI: http://redballoon.io
 Description: A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery. Designed to work with youtube videos.
-Version: 0.1
+Version: 1.0
 Author: Red Balloon Design Ltd
 Author URI: http://redballoon.io
 License: GPLv2

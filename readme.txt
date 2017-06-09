@@ -61,7 +61,7 @@ This plugin is primarily designed to work with youtube videos, but it can work w
 
 == Changelog ==
 
-= 0.1 =
+= 1.0 =
 Initial launch version.
 
 == Upgrade Notice ==
