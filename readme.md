@@ -1,5 +1,5 @@
-# RB Video 
-**Contributors:** markredballoon, redballoondesignltd  
+# RB Responsive Video Output
+**Contributors:** redballoondesignltd, markredballoon
 **Tags:** videos, youtube, modal, responsive, gallery  
 **Requires at least:** 4.3  
 **Tested up to:** 4.8  

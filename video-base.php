@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: RB Video
+Plugin Name: RB Responsive Video Output
 Plugin URI: https://github.com/redballoonio/video-plugin
 Description: A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery. Designed to work with youtube videos.
 Version: 1.2
