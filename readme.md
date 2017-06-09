@@ -1,16 +1,23 @@
-=== Video Base ===
+# Video Base 
 Contributors: markredballoon
+
 Tags: videos, youtube, modal, responsive
+
 Requires at least: 4.4.2
+
 Tested up to: 4.8
+
 Stable tag: 4.8
+
 License: GPLv2 or later
+
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
 
 A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery.
 Designed to work with youtube videos.
 
-== Description ==
+# Description 
 A plugin for responsively displaying videos. These can be within the content, as a modal, or multiple videos in a gallery.
 
 This plugin can be used in two ways: you can add single videos by their youtube id or iframe url, or you can add videos to the video custom post type. Using the custom post type you can add a custom title, excerpt and thumbnail to the images. Multiple videos can also be used in a gallery or brought out as a modal.
@@ -44,26 +51,26 @@ Changes which type of video is brought in. Embed or modal can be used with or wi
 
 _This plugin uses modal and gallery js taken from Bootstrap 3._
 
-== Installation ==
+# Installation 
 1. Upload the `video-base` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in Wordpress
 1. Add the `[video]` shortcode where you want the video to be output
 
-== Frequently Asked Questions ==
-= Does this work with other video hosts? =
+# Frequently Asked Questions 
+## Does this work with other video hosts? 
 
 This plugin is primarily designed to work with youtube videos, but it can work with any iframe content.
 
-== Screenshots ==
+# Screenshots 
 1. Example of the modal option
 2. Example of the gallery option
 3. Example of the embed option. The height of the video will respond with the width of the element.
 
-== Changelog ==
+# Changelog
 
-= 0.1 =
+## 0.1
 Initial launch version.
 
-== Upgrade Notice ==
+# Upgrade Notice
 
 No upgrades yet possible 
