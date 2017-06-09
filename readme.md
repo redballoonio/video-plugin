@@ -1,4 +1,4 @@
-# Video Base 
+# RB Video 
 Contributors: markredballoon
 
 Tags: videos, youtube, modal, responsive
@@ -48,6 +48,8 @@ Shows or hides the custom thumbnail. If the video is brought in using the youtub
 
 `type="embed/modal/gallery" (default: "embed")`
 Changes which type of video is brought in. Embed or modal can be used with or without a video page set up. Gallery requires the videos be added by the id attribute.
+
+[See the full documentation here](https://docs.google.com/document/d/1fUWAj2Yi6I0uLRp8ZyK2DwVdmiFEc0sY5Kb-TTzi3G4/edit?usp=sharing)
 
 _This plugin uses modal and gallery js taken from Bootstrap 3._
 

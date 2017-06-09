@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Video Base
+Plugin Name: RB Video
 Plugin URI: http://redballoon.io
 Description: A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery. Designed to work with youtube videos.
 Version: 1.0
@@ -10,8 +10,8 @@ License: GPLv2
 */
 
 // Custom Post Type
-add_action( 'init', 'register_cpt_video' );
-function register_cpt_video() {
+add_action( 'init', 'register_rbd_video' );
+function register_rbd_video() {
 
         $labels = array(
             'name' => __( 'Videos', 'video' ),
