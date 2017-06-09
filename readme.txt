@@ -42,11 +42,11 @@ This is the id of the video page in Wordpress that this links to. If you set the
 
 `youtube_id="[youtube-video-id]" (default: blank)`
 
-This is the id of the youtube video you want to link to. This is the 11 digit code at the end of a youtube video's url. You cannot have multiple youtube ids. 
+This is the id of the youtube video you want to link to. This is the 11 digit code at the end of a youtube video's url.
 
 `iframe_url="[non-youtube-url]" (default:blank)`
 
-If the video isn't a youtube video then a the url gets added into a responsive iframe. This isn't used if id or youtube_id is used. This can only be used to provide a responsive wrap to the iframe.
+If the video isn't a youtube video then a the url gets added into a responsive iframe.
 
 ### These options may also be set:
 
