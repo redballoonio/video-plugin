@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: RB Video
-Plugin URI: http://redballoon.io
+Plugin URI: https://github.com/redballoonio/video-plugin
 Description: A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery. Designed to work with youtube videos.
 Version: 1.2
-Author: Red Balloon Design Ltd
-Author URI: http://redballoon.io
+Author: Red Balloon Design
+Author URI: http://redballoon.io/
 License: GPLv2
 */
 
