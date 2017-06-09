@@ -42,7 +42,7 @@ Video embed using a non-youtube video:
 
 ### Shortcode options 
 
-**One of these options must be set:**
+#### One of these options must be set:
 
 **Output a video from a custom post:**
 
@@ -64,7 +64,7 @@ This is the id of the youtube video you want to link to. This is the 11 digit co
 
 If the video isn't a youtube video then a the url gets added into a responsive iframe.
 
-**These options may also be set:**
+#### These options may also be set:
 
 **Dispay type**
 
