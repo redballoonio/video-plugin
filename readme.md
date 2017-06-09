@@ -1,5 +1,5 @@
 # RB Video
-Contributors: markredballoon
+Contributors: markredballoon, redballoondesignltd
 
 Tags: videos, youtube, modal, responsive
 

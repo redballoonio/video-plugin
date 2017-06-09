@@ -1,5 +1,5 @@
 === RB Video ===
-Contributors: markredballoon
+Contributors: markredballoon, redballoondesignltd
 Tags: videos, youtube, modal, responsive, gallery
 Requires at least: 4.4.2
 Tested up to: 4.8
@@ -18,7 +18,7 @@ Includes a number of embed methods:
 * Modal: as a modal,
 * Gallery:  multiple videos in a gallery
 
-## Shortcode examples
+= Shortcode examples =
 
 Youtube video embed with a custom thumbnail and a title:
 
@@ -37,9 +37,9 @@ Video embed using a non-youtube video:
 `[video iframe_url="https://player.vimeo.com/video/197202895"][/video]`
 
 
-## Shortcode options
+= Shortcode options =
 
-### One of these options must be set:
+**One of these options must be set:**
 
 `id='[video id]' (default: blank)`
 
@@ -53,7 +53,7 @@ This is the id of the youtube video you want to link to. This is the 11 digit co
 
 If the video isn't a youtube video then a the url gets added into a responsive iframe.
 
-### These options may also be set:
+**These options may also be set:**
 
 `title="show/hide" (default: "show")`
 
@@ -81,7 +81,7 @@ Only used when the type is set to gallery. Adds different carousel control optio
 
 [See the full documentation here](https://docs.google.com/document/d/1fUWAj2Yi6I0uLRp8ZyK2DwVdmiFEc0sY5Kb-TTzi3G4/edit?usp=sharing)
 
-_This plugin uses modal and gallery js taken from Bootstrap 3._
+*This plugin uses modal and gallery js taken from Bootstrap 3.*
 == Installation ==
 1. Download the zip file from the github page
 1. Upload the unzipped folder to the `/wp-content/plugins/` directory of your wordpress site
