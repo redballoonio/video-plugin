@@ -1,4 +1,4 @@
-# RB Video 
+# RB Video
 Contributors: markredballoon
 
 Tags: videos, youtube, modal, responsive
@@ -13,14 +13,16 @@ License: GPLv2 or later
 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-
 A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery.
 Designed to work with youtube videos.
 
-# Description 
-A plugin for responsively displaying videos. These can be within the content, as a modal, or multiple videos in a gallery.
+# Description
+A plugin for managing and displaying videos on your website. Creates a "Videos" Custom post type allowing you to integrate youtube videos with Wordpress to output custom titles, descriptions and image thumbnails to display videos on your website. Alternatively you can also output any youtube video directly via shortcodes, optimised for responsive devices with a variety of output options to best suit your page.
 
-This plugin can be used in two ways: you can add single videos by their youtube id or iframe url, or you can add videos to the video custom post type. Using the custom post type you can add a custom title, excerpt and thumbnail to the images. Multiple videos can also be used in a gallery or brought out as a modal.
+Includes a number of embed methods:
+* Embed: These can be within the content, 
+* Modal: as a modal,
+* Gallery:  multiple videos in a gallery
 
 ## Shortcodes
 
@@ -49,17 +51,38 @@ Shows or hides the custom thumbnail. If the video is brought in using the youtub
 `type="embed/modal/gallery" (default: "embed")`
 Changes which type of video is brought in. Embed or modal can be used with or without a video page set up. Gallery requires the videos be added by the id attribute.
 
+`gallery_options="" (default: empty)` 
+Only used when the type is set to gallery. Adds different carousel control options: 
+* "arrows" : adds arrows that sit ontop of the video.
+* "thumbnails" : adds a row of thumnail images below that can be used to select a different video.
+* "indicators" : indicator buttons underneath the video.
+
+
+## Shortcode examples
+
+Youtube video embed with a custom thumbnail and a title:
+
+`[video id="21" title="show" thumbnail="show"]`
+
+Youtube video brought in by youtube_id displayed using a modal
+
+`[video youtube_id="SW3o7rSn-TY" type="modal"]`
+
+Video gallery using the thumbnail option:
+
+`[video id="21, 22, 23" type="gallery" gallery_options="thumbnails"]`
+
 [See the full documentation here](https://docs.google.com/document/d/1fUWAj2Yi6I0uLRp8ZyK2DwVdmiFEc0sY5Kb-TTzi3G4/edit?usp=sharing)
 
 _This plugin uses modal and gallery js taken from Bootstrap 3._
 
-# Installation 
+# Installation
 1. Upload the `video-base` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in Wordpress
 1. Add the `[video]` shortcode where you want the video to be output
 
-# Frequently Asked Questions 
-## Does this work with other video hosts? 
+# Frequently Asked Questions
+= Does this work with other video hosts? =
 
 This plugin is primarily designed to work with youtube videos, but it can work with any iframe content.
 
@@ -68,11 +91,11 @@ This plugin is primarily designed to work with youtube videos, but it can work w
 2. Example of the gallery option
 3. Example of the embed option. The height of the video will respond with the width of the element.
 
-# Changelog
+# Changelog 
 
-## 1.0
-Initial launch version.
+## 1.2 
+Public launch version.
 
-# Upgrade Notice
+# Upgrade Notice 
 
 No upgrades yet possible 
