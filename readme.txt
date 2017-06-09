@@ -1,4 +1,4 @@
-=== RB Video ===
+=== RB Responsive Video Output ===
 Contributors: markredballoon, redballoondesignltd
 Tags: videos, youtube, modal, responsive, gallery
 Requires at least: 4.3
