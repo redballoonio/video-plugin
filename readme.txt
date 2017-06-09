@@ -1,114 +1,61 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: http://example.com/
-Tags: videos, youtube, modal
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+=== Video Base ===
+Contributors: markredballoon
+Tags: videos, youtube, modal, responsive
+Requires at least: 4.4.6
+Tested up to: 7.5.2
+Stable tag: 7.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+A plugin for responsively displaying video iframes. The videos can be displayed inline or using a modal or a gallery.
+Designed to work with youtube videos.
 
 == Description ==
+A plugin for responsivly displaying videos. These can be within the content, as a modal, or multiple videos in a gallery.
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+# Shortcodes
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+`id=\'[video id]\' (default: blank)`
+This is the id of the video page in the back end that this links to. Enter this attribute or the youtube_id attribute.
 
-A few notes about the sections above:
+`youtube_id=\"[youtube video id]\" (default: blank)`
+This is the id of the youtube video you want to link to. it is the 11 digit code at the end of a youtube video\'s url. Enter this attribute or the id attribute.
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+`title=\"show/hide\" (default: \"show\")`
+Whether to show or hide the video\'s title. If there isn\'t an id set then no title will be brought in.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+`title_style=\"[css class]\" (default: blank)`
+Css class that gets added to the title. Can be used for styling the title. \"Overlayed\" is the only one built in, which makes the title absolutely positioned in the bottom left hand corner of the video.
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+`thumbnail=\"show/hide\" (default: \"show\")`
+Shows or hides the custom thumbnail. If there isn\'t an id set, or the video post has no featured image, then the youtube default image will be brought in.
+
+`type=\"embed/modal\" (default: \"embed\")`
+Changes which type of video is brought in. Either embed or modal. Both of these can be used with or without a video page set up.
+
+`iframe_url=\"non-youtube url\" (default:blank)`
+If the video isn\'t a youtube video then a the url gets added into a responsive iframe. This isn\'t used if id or youtube_id is used.
+
+
+_This plugin uses modal and gallery js taken from Bootstrap 3._
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Upload the `video-base` folder to the `/wp-content/plugins/` directory
+1. Activate the plugin through the \'Plugins\' menu in WordPress
+1. Add the `[video]` shortcode where you want the video to be output.
 
 == Frequently Asked Questions ==
+= Does this work with other video hosts? =
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+This plugin is primarily designed to work with youtube videos, but it can work with any iframe content.
 
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Example of the modal option
+2. Example of the gallery option
 
 == Changelog ==
-
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 0.1 =
+Initial launch version.
 
 == Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+ 
