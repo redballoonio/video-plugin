@@ -1,6 +1,6 @@
 === RB Video ===
 Contributors: markredballoon
-Tags: videos, youtube, modal, responsive
+Tags: videos, youtube, modal, responsive, gallery
 Requires at least: 4.4.2
 Tested up to: 4.8
 Stable tag: 4.8
@@ -79,7 +79,7 @@ Only used when the type is set to gallery. Adds different carousel control optio
 _This plugin uses modal and gallery js taken from Bootstrap 3._
 
 == Installation ==
-1. Download the zip file from this page and unzip it
+1. Download the zip file from the github page
 1. Upload the unzipped folder to the `/wp-content/plugins/` directory of your wordpress site
 1. Activate the plugin through the 'Plugins' menu in Wordpress
 1. Add the `[video]` shortcode where you want the video to be output
