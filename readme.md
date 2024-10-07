@@ -114,10 +114,9 @@ Only used when the type is set to gallery. Adds different carousel control optio
 * "thumbnails" : adds a row of thumbnail images below that can be used to select a different video.
 * "indicators" : indicator buttons underneath the video.
 
-[See the full documentation here](https://docs.google.com/document/d/1fUWAj2Yi6I0uLRp8ZyK2DwVdmiFEc0sY5Kb-TTzi3G4/edit?usp=sharing)
+[See the full documentation here](https://docs.google.com/document/d/18Se4PmefkpOZ5T-g66nJqBglMcDRObhmUDvzVsVtQMY/edit)
 
 *This plugin uses modal and gallery js taken from Bootstrap 3.*
-
 
 ## Installation 
 1. Download the zip file from the github page
