@@ -1,5 +1,6 @@
-# RB Responsive Video Output
-**Contributors:** redballoondesignltd, markredballoon
+# RB Video Base
+
+**Contributors:** redballoondesignltd, markredballoon  
 **Tags:** videos, youtube, modal, responsive, gallery  
 **Requires at least:** 4.3  
 **Tested up to:** 4.8  
@@ -150,18 +151,20 @@ This plugin is primarily designed to work with youtube videos, but it can work w
 
 ## Changelog 
 
+### 1.2.1
+* Updated the JavaScript to remove jQuery dependencies and ensure compatibility with Bootstrap 5.
 
-### 1.2 
+### 1.2.0
 * Public launch version.
 * Updated the plugin to include modal and gallery code from bootstrap
 
 
-### 1.1 
+### 1.1.0
 * Updated the javascript to use the youtube api version 3
 * Added the gallery option for videos
 
 
-### 1.0 
+### 1.0.0
 * Added video post type, Modals and controlling the videos using the youtube api
 
 
