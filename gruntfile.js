@@ -14,36 +14,36 @@ module.exports = function(grunt) {
           yuicompress: true,
           optimization: 2,
           sourceMap: true,
-          sourceMapFilename: 'public/css/video-base.map.css'
+          sourceMapFilename: 'css/video-base.map.css'
         },
         files: {
-          "public/css/video-base.min.css": "public/css/source/main.less" // destination file and source file
+          "css/video-base.min.css": "css/source/main.less" // destination file and source file
         }
       }
     },
     browserify: {
       js: {
-        src: './public/js/source/main.js',
-        dest: './public/js/video-base.js'
+        src: './js/source/main.js',
+        dest: './js/video-base.js'
       }
     },
     uglify: {
       my_target: {
         files: {
-          './public/js/video-base.min.js': ['./public/js/video-base.js']
+          './js/video-base.min.js': ['./js/video-base.js']
         }
       }
     },
     watch: {
       styles: {
-        files: ['./public/style/source/**/*.less'],
+        files: ['./style/source/**/*.less'],
         tasks: ['less'],
         options: {
           nospawn: true
         }
       },
       js: {
-        files: ['./public/js/source/**/*.js'],
+        files: ['./js/source/**/*.js'],
         tasks: ['browserify']
       }
     },

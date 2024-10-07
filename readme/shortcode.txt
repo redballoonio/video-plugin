@@ -1,0 +1,30 @@
+#Video-base Plugin Shortcodes
+
+id='[video id]' (default: blank)
+This is the id of the video page in the back end that this links to. Enter this attribute or the youtube_id attribute.
+
+youtube_id="[youtube video id]" (default: blank)
+This is the id of the youtube video you want to link to. it is the 11 digit code at the end of a youtube video's url. Enter this attribute or the id attribute.
+
+title="show/hide" (default: "show")
+Whether to show or hide the video's title. If there isn't an id set then no title will be brought in.
+
+title_style="[css class]" (default: blank)
+Css class that gets added to the title. Can be used for styling the title. "Overlayed" is the only one built in, which makes the title absolutely positioned in the bottom left hand corner of the video.
+
+thumbnail="show/hide" (default: "show")
+Shows or hides the custom thumbnail. If there isn't an id set, or the video post has no featured image, then the youtube default image will be brought in.
+
+type="embed/modal" (default: "embed")
+Changes which type of video is brought in. Either embed or modal. Both of these can be used with or without a video page set up.
+
+host="youtube" (default:"youtube")
+This variable doesn't do anything for now. When non-youtube support is added later then this will toggle what url and api is used for the iframe and JS respectively.
+
+iframe_url="non-youtube url" (default:blank)
+If the video isn't a youtube video then a the url gets added into a responsive iframe. This isn't used if id or youtube_id is used.
+
+
+## IFRAME content: [video]{{CONTENT}}[/video]
+
+The content of the iframe gets output as the title for the video. This over-writes the title set on the video page.

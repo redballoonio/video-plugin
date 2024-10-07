@@ -1,0 +1,74 @@
+<!-- This is the example output from an embedded image: -->
+<div class="video-base type--embed youtube" id="video_base_0">
+    <div class="video-content" onclick="VBplayVideo(this)">
+        <div class="video-title">
+            <h4>Video for testing 1</h4>
+        </div>
+        <div class="iframe-wrap" style="padding-bottom:56.25%;">
+            <iframe allowfullscreen="" frameborder="0" height="800" src=
+            "https://www.youtube.com/embed/YnNyH_7Kqzs?feature=oembed&amp;enablejsapi=1"
+            width="800"></iframe>
+            <div class="video-thumbnail" style=
+            "background-image:url(http://domain.local/rbd_clean/wp-content/uploads/2016/07/video_thumb.png);">
+            <!--show-->
+                <div class="play-icon"></div>
+            </div>
+        </div><!--iframe-wrap outer-->
+    </div><!--video-content-->
+    <div class="excerpt">
+        <p>This is the description that will be output.</p>
+    </div>
+</div><!-- video_base_0 -->
+
+
+<!--     ========    ========    ========    ========    ========    ========    ========    ========     -->
+<!-- This is the example output from a modal image: -->
+
+<main>
+    <!-- The content in the main section of the page: -->
+    <div class="video-base youtube" id="video_base_0">
+        <div class="video-content" onclick=
+        "jQuery(this).addClass('modal-open');jQuery('#video-modal-1').modal('show');">
+        <div class="iframe-wrap" style="padding-bottom:56.25%;">
+                <div class="video-thumbnail" style=
+                "background-image:url(http://domain.local/rbd_clean/wp-content/uploads/2016/07/video_thumb.png);">
+                <!--show-->
+                    <div class="play-icon"></div>
+                </div>
+            </div><!--iframe-wrap-->
+        </div><!--video-content-->
+        <div class="excerpt">
+            <p>This is the description that will be output.</p>
+        </div>
+    </div><!-- video_base_0 -->
+</main>
+
+<footer>
+    <!-- The content in the footer section of the page: -->
+    <div id="video-modals"><!-- this div contains all of the video modals -->
+
+        <!-- This will get output for each modal video on the page:-->
+        <div class="modal fade play-on-open" id="video-modal-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content text-center">
+                    <button class="close" data-dismiss="modal" type=
+                    "button">&times;</button>
+                    <div class="video-base type--modal youtube" onclick=
+                    "VBplayVideo(this)">
+                        <div class="iframe-wrap" style=
+                        "padding-bottom:56.25%;">
+                            <iframe allowfullscreen="" frameborder="0" height=
+                            "800" src=
+                            "https://www.youtube.com/embed/YnNyH_7Kqzs?feature=oembed&amp;enablejsapi=1"
+                            width="800"></iframe>
+                        </div><!--iframe-wrap-->
+                    </div><!--video-base--><button class="btn btn-default"
+                    data-dismiss="modal" type="button">Close</button>
+                </div><!-- Modal content-->
+            </div><!-- Modal dialog-->
+        </div><!--video-modal-1-->
+
+
+
+    </div><!--video-modals-->
+</footer>
