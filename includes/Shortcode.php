@@ -1,7 +1,7 @@
-<?php
+<?php // includes/shortcode.php
 function video_shortcode( $atts, $content = null)  {
     wp_enqueue_script( 'video-script' );
-    wp_enqueue_style( 'video-styles' );
+    //wp_enqueue_style( 'video-styles' );
 
     extract( shortcode_atts( array(
                 'id'                => '',                // id of the video - required to the hook into the video post
@@ -14,7 +14,7 @@ function video_shortcode( $atts, $content = null)  {
                 'iframe_url'        => '',                 // URL to use if id and youtube_id haven't been set.
                 'gallery_options'   => '',                 // comma seperated list of options for the gallery
                 'mp4'               => '',
-                'preload'           => '',
+                'preload'           => 'metadata',
                 'loop'           => '',
                 'poster'            => '',
                 'poster_id'         => '',
