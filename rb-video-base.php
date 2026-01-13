@@ -3,7 +3,7 @@
 Plugin Name: RB Video Base
 Plugin URI: http://redballoon.io
 Description: A base for all your videos
-Version: 1.1.1
+Version: 1.3.0
 Author: Red Balloon Design Ltd
 Author URI: http://redballoon.io
 License: GPLv2
@@ -16,7 +16,7 @@ https://docs.google.com/spreadsheets/d/1apC0th0X_rq8ybvTDsp40lWcHfthdna8WMbAywX7
 
 if ( ! defined('ABSPATH') ) exit;
 
-define('RBVB_VERSION', '1.2.0');
+define('RBVB_VERSION', '1.3.0');
 define('RBVB_PATH', plugin_dir_path(__FILE__));
 define('RBVB_URL', plugin_dir_url(__FILE__));
 
