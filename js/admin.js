@@ -135,17 +135,12 @@
 })();
 
 
-jQuery(function ($) {
-  var $shortcode = $('#rbvb_video_post');
-  if (!$shortcode.length) return;
+(function ($) {
+  'use strict';
 
-  var $builder = $('#rbvb_builder');
-  var $toggle = $('#rbvb_toggle_builder');
-  var $apply = $('#rbvb_apply');
-  var $cancel = $('#rbvb_cancel');
-
-  var $value = $('#rbvb_value');
-  var $poster = $('#rbvb_poster_url');
+  // Prevent double-init if the script is loaded twice
+  if (window.__RBVB_BUILDER_INIT__) return;
+  window.__RBVB_BUILDER_INIT__ = true;
 
   function escapeAttr(str) {
     return String(str || '').replace(/"/g, '&quot;');
@@ -156,41 +151,31 @@ jQuery(function ($) {
     if (!val) return '';
 
     // Raw ID
-    if (/^[a-zA-Z0-9_-]{6,}$/.test(val) && val.indexOf('http') !== 0) {
-      return val;
-    }
+    if (/^[a-zA-Z0-9_-]{6,}$/.test(val) && val.indexOf('http') !== 0) return val;
 
-    // URL patterns
     try {
       var url = new URL(val);
       var host = (url.hostname || '').toLowerCase();
 
-      if (host.includes('youtu.be')) {
+      if (host.indexOf('youtu.be') !== -1) {
         return url.pathname.replace(/^\//, '').split('/')[0] || '';
       }
 
-      if (host.includes('youtube.com') || host.includes('youtube-nocookie.com')) {
-        // watch?v=
+      if (host.indexOf('youtube.com') !== -1 || host.indexOf('youtube-nocookie.com') !== -1) {
         var v = url.searchParams.get('v');
         if (v) return v;
 
-        // /shorts/<id> or /embed/<id>
         var m = url.pathname.match(/\/(shorts|embed)\/([^/?#]+)/);
         if (m && m[2]) return m[2];
       }
-    } catch (e) {
-      // not a URL
-    }
+    } catch (e) {}
 
     return '';
   }
 
   function isMp4Url(input) {
     var val = (input || '').trim().toLowerCase();
-    if (!val) return false;
-
-    // Simple check: ends with .mp4 or has .mp4? query
-    return /\.mp4(\?.*)?$/.test(val);
+    return !!val && /\.mp4(\?.*)?$/.test(val);
   }
 
   function buildShortcode(value, poster) {
@@ -199,9 +184,7 @@ jQuery(function ($) {
     if (!v) return '';
 
     var yt = detectYouTubeId(v);
-
     if (yt) {
-      // Always show thumbnail for youtube
       var sc = '[video youtube_id="' + escapeAttr(yt) + '" thumbnail="show"';
       if (p) sc += ' poster_img_url="' + escapeAttr(p) + '"';
       sc += ']';
@@ -215,39 +198,77 @@ jQuery(function ($) {
       return sc2;
     }
 
-    // If neither, assume YouTube ID (fallback), but don’t guess too hard:
-    // return '' to force valid input.
     return '';
   }
 
-  function openBuilder() {
-    $builder.slideDown(150);
+  function getEls() {
+    return {
+      $shortcode: $('#rbvb_video_post'),
+      $builder: $('#rbvb_builder'),
+      $toggle: $('#rbvb_toggle_builder'),
+      $apply: $('#rbvb_apply'),
+      $cancel: $('#rbvb_cancel'),
+      $value: $('#rbvb_value'),
+      $poster: $('#rbvb_poster_url')
+    };
+  }
+
+  function openBuilder($builder, $toggle) {
+    $builder.stop(true, true).slideDown(150);
     $toggle.text('Close');
   }
-  function closeBuilder() {
-    $builder.slideUp(150);
+
+  function closeBuilder($builder, $toggle) {
+    $builder.stop(true, true).slideUp(150);
     $toggle.text('Edit Video');
   }
 
-  $toggle.on('click', function () {
-    if ($builder.is(':visible')) closeBuilder();
-    else openBuilder();
+  // Ensure we don't have duplicate bindings even if something re-runs
+  $(document).off('click.rbvb', '#rbvb_toggle_builder');
+  $(document).off('click.rbvb', '#rbvb_cancel');
+  $(document).off('click.rbvb', '#rbvb_apply');
+
+  // Delegated bindings
+  $(document).on('click.rbvb', '#rbvb_toggle_builder', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation(); // critical if WP/metabox also listens
+    var els = getEls();
+    if (!els.$shortcode.length) return;
+
+    if (els.$builder.is(':visible')) closeBuilder(els.$builder, els.$toggle);
+    else openBuilder(els.$builder, els.$toggle);
+
+    return false;
   });
 
-  $cancel.on('click', function () {
-    closeBuilder();
+  $(document).on('click.rbvb', '#rbvb_cancel', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var els = getEls();
+    closeBuilder(els.$builder, els.$toggle);
+    return false;
   });
 
-  $apply.on('click', function () {
-    var sc = buildShortcode($value.val(), $poster.val());
+  $(document).on('click.rbvb', '#rbvb_apply', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var els = getEls();
+
+    var sc = buildShortcode(els.$value.val(), els.$poster.val());
     if (!sc) {
       alert('Please enter a valid YouTube URL/ID or an MP4 URL.');
-      return;
+      return false;
     }
-    $shortcode.val(sc).trigger('change');
-    closeBuilder();
+
+    els.$shortcode.val(sc).trigger('change');
+    closeBuilder(els.$builder, els.$toggle);
+    return false;
   });
 
+  // Media pickers (keep as-is)
   function hasWpMedia() {
     return typeof window.wp !== 'undefined' && !!window.wp.media;
   }
@@ -264,33 +285,49 @@ jQuery(function ($) {
 
     frame.on('select', function () {
       var a = frame.state().get('selection').first();
-      var url = a && a.get('url') ? a.get('url') : '';
+      if (!a) return;
+
+      var json = a.toJSON ? a.toJSON() : {};
+      var sizes = (json.sizes || {});
+      var url =
+        (sizes.medium_large && sizes.medium_large.url) ||
+        (sizes.large && sizes.large.url) ||
+        (sizes.medium && sizes.medium.url) ||
+        json.url || '';
+
       if (url) cb(url);
     });
 
     frame.open();
   }
 
-  $('#rbvb_pick_mp4').on('click', function (e) {
+  $(document).off('click.rbvb', '#rbvb_pick_mp4').on('click.rbvb', '#rbvb_pick_mp4', function (e) {
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var els = getEls();
+
     pickMedia(
       { title: 'Select MP4', library: { type: 'video' }, buttonText: 'Use MP4' },
-      function (url) {
-        $value.val(url).trigger('change');
-      }
+      function (url) { els.$value.val(url).trigger('change'); }
     );
+    return false;
   });
 
-  $('#rbvb_pick_poster').on('click', function (e) {
+  $(document).off('click.rbvb', '#rbvb_pick_poster').on('click.rbvb', '#rbvb_pick_poster', function (e) {
     e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    var els = getEls();
+
     pickMedia(
       { title: 'Select Poster', library: { type: 'image' }, buttonText: 'Use Image' },
-      function (url) {
-        $poster.val(url).trigger('change');
-      }
+      function (url) { els.$poster.val(url).trigger('change'); }
     );
+    return false;
   });
-});
+
+})(jQuery);
 
 
 
