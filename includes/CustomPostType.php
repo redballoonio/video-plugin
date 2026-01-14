@@ -34,6 +34,7 @@ class RBVB_CPT {
       'public' => true,
       'show_ui' => true,
       'show_in_menu' => true,
+      'show_in_rest' => true,
       'menu_position' => 5,
       'show_in_nav_menus' => true,
       'publicly_queryable' => true,
